@@ -1,3 +1,4 @@
+
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -103,8 +104,6 @@ public class SudokuTest {
 		intArray[4][4] = 5;
 		
 		Sudoku test = new Sudoku(intArray);
-//		System.out.println(expected);
-//		System.out.println(test);
 		
 		assertArrayEquals("Failure in sudokuTest6, expected Array = ", intArray, test.getArray());
 		assertEquals("Failure in sudokuTest6, expected String = ", expected, test.toString());
@@ -147,4 +146,84 @@ public class SudokuTest {
 		assertEquals("Failure in sudokuTest7, expected String =", expected, test.toString());
 	}
 
+	@Test
+	public void sudokuTest8() {
+		String expected = 	"++===+===+===++===+===+===++===+===+===++\n"+
+							"|| 1 | 1 | 1 || 1 | 1 | 1 || 1 | 1 | 1 ||\n"+
+							"++---+---+---++---+---+---++---+---+---++\n"+
+							"|| 1 |   | 1 || 1 | 1 | 1 || 1 |   | 1 ||\n"+
+							"++---+---+---++---+---+---++---+---+---++\n"+
+							"|| 1 | 1 | 1 || 1 | 1 | 1 || 1 | 1 | 1 ||\n"+
+							"++===+===+===++===+===+===++===+===+===++\n"+
+							"|| 1 | 1 | 1 || 1 | 1 | 1 || 1 | 1 | 1 ||\n"+
+							"++---+---+---++---+---+---++---+---+---++\n"+
+							"|| 1 |   | 1 || 1 | 1 | 1 || 1 |   | 1 ||\n"+
+							"++---+---+---++---+---+---++---+---+---++\n"+
+							"|| 1 | 1 | 1 || 1 | 1 | 1 || 1 | 1 | 1 ||\n"+
+							"++===+===+===++===+===+===++===+===+===++\n"+
+							"|| 1 | 1 | 1 || 1 | 1 | 1 || 1 | 1 | 1 ||\n"+
+							"++---+---+---++---+---+---++---+---+---++\n"+
+							"|| 1 |   | 1 || 1 | 1 | 1 || 1 |   | 1 ||\n"+
+							"++---+---+---++---+---+---++---+---+---++\n"+
+							"|| 1 | 1 | 1 || 1 | 1 | 1 || 1 | 1 | 1 ||\n"+
+							"++===+===+===++===+===+===++===+===+===++";
+		
+		for (int i = 0; i < intArray.length; i++) {
+			for (int j = 0; j < intArray[i].length; j++) {
+				intArray[i][j] = 1;
+			}
+		}
+		intArray[1][1] = 0;
+		intArray[1][7] = 0;
+		intArray[7][1] = 0;
+		intArray[7][7] = 0;
+		intArray[4][1] = 0;
+		intArray[4][7] = 0;
+		
+		Sudoku test = new Sudoku(intArray);
+		
+		assertArrayEquals("Failure in sudokuTest7, expected Array = ", intArray, test.getArray());
+		assertFalse(test.isFilled());
+	}
+	
+	@Test
+	public void sudokuTest9() {
+		String expected = 	"++===+===+===++===+===+===++===+===+===++\n"+
+							"|| 1 | 2 | 3 || 4 | 5 | 6 || 7 | 8 | 9 ||\n"+
+							"++---+---+---++---+---+---++---+---+---++\n"+
+							"|| 4 | 5 | 6 || 7 | 8 | 9 || 1 | 2 | 3 ||\n"+
+							"++---+---+---++---+---+---++---+---+---++\n"+
+							"|| 7 | 8 | 9 || 1 | 2 | 3 || 4 | 5 | 6 ||\n"+
+							"++===+===+===++===+===+===++===+===+===++\n"+
+							"|| 2 | 3 | 4 || 5 | 6 | 7 || 8 | 9 | 1 ||\n"+
+							"++---+---+---++---+---+---++---+---+---++\n"+
+							"|| 5 | 6 | 7 || 8 | 9 | 1 || 2 | 3 | 4 ||\n"+
+							"++---+---+---++---+---+---++---+---+---++\n"+
+							"|| 8 | 9 | 1 || 2 | 3 | 4 || 5 | 6 | 7 ||\n"+
+							"++===+===+===++===+===+===++===+===+===++\n"+
+							"|| 3 | 4 | 5 || 6 | 7 | 8 || 9 | 1 | 2 ||\n"+
+							"++---+---+---++---+---+---++---+---+---++\n"+
+							"|| 6 | 7 | 8 || 9 | 1 | 2 || 3 | 4 | 5 ||\n"+
+							"++---+---+---++---+---+---++---+---+---++\n"+
+							"|| 9 | 1 | 2 || 3 | 4 | 5 || 6 | 7 | 8 ||\n"+
+							"++===+===+===++===+===+===++===+===+===++";
+		
+		int[][] completeSudoku = {{1, 2, 3, 4, 5, 6, 7, 8, 9},
+								  {4, 5, 6, 7, 8, 9, 1, 2, 3},
+								  {7, 8, 9, 1, 2, 3, 4, 5, 6},
+								  {2, 3, 4, 5, 6, 7, 8, 9, 1},
+								  {5, 6, 7, 8, 9, 1, 2, 3, 4},
+								  {8, 9, 1, 2, 3, 4, 5, 6, 7},
+								  {3, 4, 5, 6, 7, 8, 9, 1, 2},
+								  {6, 7, 8, 9, 1, 2, 3, 4, 5},
+								  {9, 1, 2, 3, 4, 5, 6, 7, 8}};
+				
+		Sudoku test = new Sudoku(completeSudoku);
+		
+		assertArrayEquals("Failure in sudokuTest9, expected Array = ", completeSudoku, test.getArray());
+		assertEquals("Failure in sudokuTest9, expected String = ", expected, test.toString());
+		assertTrue(test.isFilled());
+	
+	}
+	
 }

@@ -23,20 +23,6 @@ public class Sudoku {
 		return this.array;
 	}
 	
-	/**	intToString is a method which takes an integer and converts it to a String.
-	 * 	If the integer value happens to be 0 then the method returns an empty space (" ").
-	 * 
-	 * @param value	an integer value
-	 * @return	A String representation of that integer unless int == 0. If int == 0 then returns " ".
-	 */
-	public String intToString(int value) {
-		if (value == 0) {
-			return " ";
-		} else {
-			return Integer.toString(value);
-		}
-	}
-	
 	/**	isFilled checks if all elements of a Sudoku puzzle are filled.
 	 * 
 	 * @return true if all elements of the Sudoku are filled, false if not.
@@ -51,30 +37,28 @@ public class Sudoku {
 	}
 	
 	public String toString() {
-		String thickBorder 	= "++===+===+===++===+===+===++===+===+===++";
-		String thinBorder 	= "++---+---+---++---+---+---++---+---+---++";
+		String thickBorder 	= "++===+===+===++===+===+===++===+===+===++\n";
+		String thinBorder 	= "++---+---+---++---+---+---++---+---+---++\n";
 		String s = "";
-		for (int i = 0; i < 9; i++) {
-			if (i % 3 == 0) {
-				s += thickBorder + "\n";
-			} else {
-				s += thinBorder + "\n";
-			}
-			for (int j = 0; j < 9; j++) {
-				String element = intToString(getArray()[i][j]);
+		int n;
+		for (int i = 0; i < getArray().length; i++) {
+			s += (i % 3 == 0) ? thickBorder : thinBorder;
+			for (int j = 0; j < getArray()[i].length; j++) {
+				n = getArray()[i][j];
+				String element = (n == 0) ? "   " : " " + Integer.toString(n) + " ";
 				if (j % 3 == 0) {
-					s += "|| " + element + " ";
+					s += "||" + element;
 				} else if (j == 8) {
-					s += "| " + element + " ||\n";
+					s += "|" + element + "||\n";
 				} else {
-					s += "| " + element + " ";
+					s += "|" + element;
 				}
 			}
 		}
 		s += thickBorder;
 		return s;
 	}
-
+	
 	
 	public static void main(String[] args) {
 		int[][] array = new int[9][9];
@@ -82,5 +66,8 @@ public class Sudoku {
 		
 		System.out.println(s1);
 		System.out.println(s1.isFilled());
+		String testString = "0123456789";
+		
+		SudokuRead test = new SudokuRead();
 	}
 }
