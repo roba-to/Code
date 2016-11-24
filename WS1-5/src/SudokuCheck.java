@@ -79,31 +79,8 @@ public class SudokuCheck {
 				boxColumn = j/3;
 				boxNumber = 3*(i/3) + (j/3);
 				counter = (i*3) + j - (boxRow*9 + boxColumn*3); //Position 0 through 8 of value within 3x3 sector
-				if (boxRow == 0) {
-					if (boxColumn == 0) {
-						array[boxNumber][counter] = sudoku.getArray()[i][j]; //box 0
-					} else if (boxColumn == 1) {
-						array[boxNumber][counter] = sudoku.getArray()[i][j]; //box 1
-					} else if (boxColumn == 2) {
-						array[boxNumber][counter] = sudoku.getArray()[i][j]; //box 2
-					}
-				} else if (boxRow == 1) {
-					if (boxColumn == 0) {
-						array[boxNumber][counter] = sudoku.getArray()[i][j]; //box 3
-					} else if (boxColumn == 1) {
-						array[boxNumber][counter] = sudoku.getArray()[i][j]; //box 4
-					} else if (boxColumn == 2) {
-						array[boxNumber][counter] = sudoku.getArray()[i][j]; //box 5		
-					} 
-				} else {
-					if (boxColumn == 0) {
-						array[boxNumber][counter] = sudoku.getArray()[i][j]; //box 6
-					} else if (boxColumn == 1) {
-						array[boxNumber][counter] = sudoku.getArray()[i][j]; //box 7
-					} else if (boxColumn == 2) {
-						array[boxNumber][counter] = sudoku.getArray()[i][j]; //box 8
-					}
-				}
+//				System.out.println(boxNumber + ":" + counter + "   " +  sudoku.getArray()[i][j]);
+				array[boxNumber][counter] = sudoku.getArray()[i][j];
 			}
 		}
 		return array;
@@ -144,8 +121,8 @@ public class SudokuCheck {
 		Sudoku s2 = new Sudoku(incorrectSudoku);
 		Sudoku s3 = new Sudoku(boxes);
 		
-		check(s1);
-		check(s2);
+//		check(s1);
+//		check(s2);
 		check(s3);
 		
 	}

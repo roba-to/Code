@@ -22,14 +22,6 @@ public class SudokuRead {
 					}
 				}
 			}
-		} catch (IllegalArgumentException error) {
-			System.out.println("IllegalArgumentException in " + filename 
-							+ "\nOnly values between 0 and 9 or Whitespace are valid inputs" 
-							+ "\nFile must contain at least 9 lines of valid inputs");
-			error.printStackTrace();
-		} catch (IOException error) {
-			System.out.println("Filename: " + filename + "not found");
-			error.printStackTrace();
 		} finally {
 			in.close(); //close BufferedReader
 		}

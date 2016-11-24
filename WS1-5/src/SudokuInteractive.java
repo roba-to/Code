@@ -4,7 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SudokuInteractive extends Sudoku{
-	private static int[][] playerArray;
 	private static int[][] originalState;
 	private static String  message = "";
 	
@@ -14,7 +13,7 @@ public class SudokuInteractive extends Sudoku{
 	
 	public static void play(String file) {
 		int column, row, value;
-		boolean gameOver 	= false;
+		boolean gameOver = false;
 		Scanner reader 		= new Scanner(System.in);
 		String 	userInput 	= "";
 		Pattern command 	= Pattern.compile("[a-i][1-9]:[1-9]");
@@ -28,17 +27,22 @@ public class SudokuInteractive extends Sudoku{
 		try {
 			SudokuInteractive board = new SudokuInteractive(SudokuRead.readSudoku(file).getArray());
 			originalState = copyBoard(board.getArray());
+
 			while (gameOver == false) {
+				
 				System.out.println(board);
 				System.out.print(messages[5]);
 				userInput = reader.nextLine();
 				Matcher m = command.matcher(userInput);
+				
 				if (userInput.equals("reset")) {
 					message = messages[0];
 					board = new SudokuInteractive(originalState);
+					
 				} else if (userInput.equals("exit")) {
 					System.out.println("****** BYE BYE ******");
 					gameOver = true;
+					System.exit(0);
 					
 				} else if (m.matches()) {
 					row 	= (Character.getNumericValue(userInput.charAt(0)) - 10);
@@ -55,7 +59,8 @@ public class SudokuInteractive extends Sudoku{
 						if (SudokuCheck.simpleCheck(board) == false) {
 							message += "\n" + messages[2]; //Not correct
 						} else {
-							message = "\n" + messages[3]; //Win
+							System.out.println(board);
+							System.out.println(messages[3]); //Win
 							gameOver = true;
 						}
 					}
@@ -64,8 +69,13 @@ public class SudokuInteractive extends Sudoku{
 				}
 			}
 		} catch (IOException e) {
-			System.out.println("Error: File Not Found!");
+			System.err.println("IOException");
 			e.printStackTrace();
+			System.exit(1);
+		} catch (IllegalArgumentException e) {
+			System.err.println("IllegalArgumentException!");
+			e.printStackTrace();
+			System.exit(1);
 		}
 	}
 	
@@ -84,7 +94,7 @@ public class SudokuInteractive extends Sudoku{
 		String element;
 		String thickBorder 	= "    ++===+===+===++===+===+===++===+===+===++\n";
 		String thinBorder 	= "    ++---+---+---++---+---+---++---+---+---++\n";
-		String[] alphaRow = {"a", "b", "c", "d", "e", "f", "g", "h", "i"};
+		String[] row = {"a", "b", "c", "d", "e", "f", "g", "h", "i"};
 		String s = "\n       1   2   3    4   5   6    7   8   9   \n";
 		int n;
 
@@ -98,7 +108,7 @@ public class SudokuInteractive extends Sudoku{
 					element = (n == 0) ? "   " : " " + Integer.toString(n) + " ";
 				}
 				if (j == 0) {
-					s += " " + alphaRow[i] + "  ||" + element;
+					s += " " + row[i] + "  ||" + element;
 				} else if (j % 3 == 0 && j != 0) {
 					s += "||" + element;
 				} else if (j == 8) {
